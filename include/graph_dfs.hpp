@@ -2,7 +2,7 @@
 #include <string>
 #include <vector>
 #include <sstream>
-
+#include <iterator>
 
 class graph_dfs{
 private:
@@ -58,7 +58,7 @@ public:
     
     void write_result (std::vector<unsigned int> result , std::ostringstream& stream) const
     {
-        copy(result.begin(),result.end(),std::ostream_iterator<int> (stream," "));
+        copy(result.begin(),result.end(),std::ostream_iterator<unsigned int> (stream," "));
     }
     
     void dfs(unsigned int index,std::vector<unsigned int> &list,std::vector<unsigned int> &result) const
