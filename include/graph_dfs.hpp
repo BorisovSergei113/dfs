@@ -2,7 +2,7 @@
 #include <string>
 #include <vector>
 #include <sstream>
-#include <iterator>
+
 
 class graph_dfs{
 private:
@@ -44,21 +44,21 @@ public:
         for (std::size_t i = 0; i<members_graph; i++) {
             for (std::size_t j = 0; j<members_graph; j++) {
                 int m ;
-                stream>>m;
+                if(!(stream>>m)) throw "incorrect input format symbol";
                 if (i == j && m != 0) {
                     throw "item cannot be linked to itself";
                 }
                 if (m == 1 | m == 0 ) {
                     matr_graph[i][j] = m;
                 }
-                else throw "incorrect input format";
+                else throw "incorrect input format number";
             }
         }
     }
     
     void write_result (std::vector<unsigned int> result , std::ostringstream& stream) const
     {
-        copy(result.begin(),result.end(),std::ostream_iterator<unsigned int> (stream," "));
+        copy(result.begin(),result.end(),std::ostream_iterator<int> (stream," "));
     }
     
     void dfs(unsigned int index,std::vector<unsigned int> &list,std::vector<unsigned int> &result) const
@@ -85,4 +85,7 @@ public:
     
 };
 
-
+void write_result (std::vector<unsigned int> result , std::ostringstream& stream)
+{
+    copy(result.begin(),result.end(),std::ostream_iterator<int> (stream," "));
+}
