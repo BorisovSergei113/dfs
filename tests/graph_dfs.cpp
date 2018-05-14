@@ -21,14 +21,26 @@ TEST_CASE("Test Read graph"){
     g.read(stream);
     string result = "2 1 4 3 ";
     ostringstream output;
-    g.write_result(g.DFS(2), output);
+    write_result(g.DFS(2), output);
     REQUIRE(result == output.str());
 }
 
-TEST_CASE("Test incorrect input format"){
+TEST_CASE("Test incorrect input format symbol"){
     graph_dfs g(4);
     string input {
-        "0 1 8 1\n"
+        "0 1 a 1\n"
+        "1 0 1 0\n"
+        "0 1 0 0\n"
+        "1 0 0 0\n"
+    };
+    istringstream stream (input);
+    REQUIRE_THROWS(g.read(stream));
+}
+
+TEST_CASE("Test incorrect input format number"){
+    graph_dfs g(4);
+    string input {
+        "0 1 9 1\n"
         "1 0 1 0\n"
         "0 1 0 0\n"
         "1 0 0 0\n"
@@ -47,4 +59,3 @@ TEST_CASE("Test item cannot be linked to itself"){
     istringstream stream (input);
     REQUIRE_THROWS(g.read(stream));
 }
-
